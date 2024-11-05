@@ -25,3 +25,47 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+## High-level software design diagram
+
+                             +-------------------+
+                             |     React App     |
+                             +-------------------+
+                                     |
+                  +------------------+------------------+
+                  |                                     |
+           +-------------+                      +-------------+
+           |             |                      |  lib        |
+           |     App     |                      | (Helpers,   |
+           |             |                      | Constants)  |
+           +-------------+                      +-------------+
+                  |
+    +-------------+------------+
+    |           Pages          |
+    |(Inventory, CreateProduct)|        
+    +-------------+------------+
+                  |
+    +--------+---------------------------+
+             |                          |
+       +-----+------+          +--------+-------+
+       |    UI      |          |     common     |             
+       |            |          |(product select)| 
+       +-------------           --------------+             
+                 +                                
+            +-------------+                
+            |   API       |                 
+            | (Models,    |                 
+            | react-query |
+            |       hooks)|                 
+
+
+
+
+Components:
+1. App - — everything that makes the app run — routing, global styles, providers.
+2. Pages - our full 2 pages (inventory and create product)
+3. common - reused business-related implementations of product features ( only product select in our case)
+4. UI (if needed) - components for possible future design system, not tied to any business context
+5. API - would consist of: models (typescript types) copying backend response and some hooks for api, abstracted over react-query
+6. lib - some utils, helpers, constants, etc.
+
+Note: state management seems to be simple enough to be covered by react-query
