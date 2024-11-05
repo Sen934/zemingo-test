@@ -1,15 +1,13 @@
-import React from 'react';
 import type { Router } from "@remix-run/router/dist/router";
+import React from "react";
 import { RouterProvider } from "react-router-dom";
 
-type Props = {
-  router: Router
-}
+type TProps = {
+  router: Router;
+};
 
-const Providers: React.FC<Props> = ({router}: Props) => {
-  return (
-      <RouterProvider router={router}/>
-  )
-}
+const Providers: React.FC<TProps> = ({ router }: TProps) => {
+  return <RouterProvider router={router} />;
+};
 
-export {Providers};
+export { Providers };
