@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { ENV } from "../../lib/constant";
-import { TProduct } from "../models/product";
+import { IProduct } from "../models/product";
 import { QueryKey } from "../queryKeys";
 
 const fetchProducts = async () => {
-  const response = await axios.get<TProduct[]>(`${ENV.API_URL}/product/all`);
+  const response = await axios.get<IProduct[]>(`${ENV.API_URL}/product/all`);
 
   return response.data;
 };

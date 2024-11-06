@@ -25,7 +25,7 @@ export const ProductSelect: React.FC = () => {
       <Controller
         name="productName"
         control={control}
-        rules={{ required: "Country is required" }}
+        rules={{ required: "Product is required" }}
         disabled={isProductsLoading}
         render={({ field }) => (
           <Select
@@ -34,7 +34,6 @@ export const ProductSelect: React.FC = () => {
             id="product-name-select"
             labelId="product-name-select-label"
             sx={{ minWidth: 200 }}
-            value={""}
           >
             {isProductsLoading && <MenuItem>Loading...</MenuItem>}
             {products.map(({ name }) => (

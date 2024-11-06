@@ -1,5 +1,5 @@
-type TProduct = {
+interface IProduct {
   name: string;
-};
+}
 
-export type { TProduct };
+export type { IProduct };

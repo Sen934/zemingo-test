@@ -1,10 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { ENV } from "../../lib/constant";
-import { TProduct } from "../models/product";
+import { IProduct } from "../models/product";
 
-const createProduct = async (product: TProduct) => {
-  const response = await axios.put<TProduct[]>(
+const createProduct = async (product: IProduct) => {
+  const response = await axios.put<IProduct[]>(
     `${ENV.API_URL}/product`,
     product,
   );
