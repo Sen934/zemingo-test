@@ -1,14 +1,9 @@
 import { Button, Stack } from "@mui/material";
 import React from "react";
-import {
-  FormProvider,
-  useFieldArray,
-  useForm,
-  useFormContext,
-} from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
+import { IInventoryItem } from "../../api/models/inventory";
 import { ProductSelect } from "../../components/common/ProductSelect";
 import { Quantity } from "../../components/common/Quantity";
-import { TInventoryForm } from "./types";
 
 type TAddInventoryItemForm = {
   productName: string;
@@ -20,33 +15,19 @@ const initialValues = {
   quantity: 0,
 };
 
-const AddInventoryItem: React.FC = ({}) => {
+type TAddInventoryItemProps = {
+  onAddInventoryItem: (data: IInventoryItem) => void;
+};
+
+const AddInventoryItem: React.FC<TAddInventoryItemProps> = ({
+  onAddInventoryItem,
+}) => {
   const addInventoryItemMethods = useForm<TAddInventoryItemForm>({
     defaultValues: initialValues,
   });
 
-  const { control: inventoryFormControl } = useFormContext<TInventoryForm>();
-
-  const { append, fields, update } = useFieldArray({
-    control: inventoryFormControl,
-    name: "items",
-  });
-
-  const productName = addInventoryItemMethods.watch("productName");
-  const quantity = addInventoryItemMethods.watch("quantity");
-
-  const onAddItem = () => {
-    const productIndex = fields.findIndex(({ name }) => name === productName);
-
-    if (productIndex === -1) {
-      append({ name: productName, quantity });
-    } else {
-      const inventoryProduct = fields[productIndex];
-      update(productIndex, {
-        quantity: quantity + inventoryProduct.quantity,
-        name: productName,
-      });
-    }
+  const onAddItem = (data: TAddInventoryItemForm) => {
+    onAddInventoryItem({ name: data.productName, quantity: data.quantity });
 
     addInventoryItemMethods.reset();
   };
