@@ -8,7 +8,13 @@ type TPageLayoutProps = {
 
 const PageLayout: React.FC<TPageLayoutProps> = ({ title, children }) => {
   return (
-    <Stack direction="column" justifyContent="center" height="100%" gap={8}>
+    <Stack
+      direction="column"
+      justifyContent="center"
+      alignItems="center"
+      height="100%"
+      gap={8}
+    >
       <Typography variant="h2" align="center">
         {title}
       </Typography>

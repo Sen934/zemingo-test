@@ -6,13 +6,13 @@ import { AddInventoryItem } from "./AddInventoryItem";
 import { InventoryFieldsList } from "./InventoryFieldsList";
 import { TInventoryForm } from "./types";
 
-const initialValues = {
-  items: [],
+type TInventoryFormProps = {
+  initialItems: IInventoryItem[];
 };
 
-const InventoryForm: React.FC = () => {
+const InventoryForm: React.FC<TInventoryFormProps> = ({ initialItems }) => {
   const { control, handleSubmit } = useForm<TInventoryForm>({
-    defaultValues: initialValues,
+    defaultValues: { items: initialItems },
   });
 
   const { append, fields, update, remove } = useFieldArray({

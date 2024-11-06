@@ -1,7 +1,8 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { ENV } from "../../lib/constant";
 import { IProduct } from "../models/product";
+import { QueryKey } from "../queryKeys";
 
 const createProduct = async (product: IProduct) => {
   const response = await axios.put<IProduct[]>(
@@ -13,8 +14,13 @@ const createProduct = async (product: IProduct) => {
 };
 
 const useCreateProduct = () => {
+  const queryClient = useQueryClient();
+
   const { mutateAsync, isLoading } = useMutation({
     mutationFn: createProduct,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [QueryKey.ProductAll] });
+    },
   });
 
   return { createProduct: mutateAsync, isLoading };
