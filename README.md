@@ -65,7 +65,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 Components:
 1. App - — everything that makes the app run — routing, global styles, providers.
 2. Pages - our full 2 pages (inventory and create product)
-3. common - reused business-related implementations of product features ( only product select in our case). Product and Quantity components don't have to be there - they're just for an example
+3. common - reused business-related implementations of product features. Product and Quantity components don't have to be there - they're just for an example
 4. UI (if needed) - components for possible future design system, not tied to any business context
 5. API - would consist of: models (typescript types) copying backend response and some hooks for api, abstracted over react-query
 6. lib - some utils, helpers, constants, etc.
