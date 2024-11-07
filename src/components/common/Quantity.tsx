@@ -17,6 +17,7 @@ const Quantity: React.FC = () => {
       render={({ field }) => (
         <TextField
           {...field}
+          sx={{ width: "100%" }}
           label="Quantity"
           variant="outlined"
           type="number"

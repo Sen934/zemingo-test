@@ -20,7 +20,11 @@ export const ProductSelect: React.FC = () => {
   }
 
   return (
-    <FormControl variant="outlined" error={!!errors.productName}>
+    <FormControl
+      variant="outlined"
+      error={!!errors.productName}
+      sx={{ width: "100%" }}
+    >
       <InputLabel id="product-name-select-label">Product name</InputLabel>
       <Controller
         name="productName"
@@ -33,7 +37,6 @@ export const ProductSelect: React.FC = () => {
             label="Please select product name"
             id="product-name-select"
             labelId="product-name-select-label"
-            sx={{ minWidth: 200 }}
           >
             {isProductsLoading && <MenuItem>Loading...</MenuItem>}
             {products.map(({ name }) => (
