@@ -1,10 +1,10 @@
+### Run npm `npm install` in root directory and  create .env and add variables from .env.example
+
 ## Available Scripts
 
 In the project directory, you can run:
 
 ### `npm start`
-
-### before starting create .env and add variables from .env.example
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
