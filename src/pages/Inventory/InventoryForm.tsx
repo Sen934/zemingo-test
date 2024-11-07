@@ -1,6 +1,8 @@
 import { Button, Stack } from "@mui/material";
+import { useNotifications } from "@toolpad/core/useNotifications";
 import React from "react";
 import { useFieldArray, useForm } from "react-hook-form";
+import { useUpdateInventory } from "../../api/hooks/useUpdateInventory";
 import { IInventoryItem } from "../../api/models/inventory";
 import { AddInventoryItem } from "./AddInventoryItem";
 import { InventoryFieldsList } from "./InventoryFieldsList";
@@ -11,8 +13,12 @@ type TInventoryFormProps = {
 };
 
 const InventoryForm: React.FC<TInventoryFormProps> = ({ initialItems }) => {
-  const { control, handleSubmit } = useForm<TInventoryForm>({
-    defaultValues: { items: initialItems },
+  const notifications = useNotifications();
+
+  const { updateInventory } = useUpdateInventory();
+
+  const { control, handleSubmit, reset } = useForm<TInventoryForm>({
+    defaultValues: { items: initialItems ?? [] },
   });
 
   const { append, fields, update, remove } = useFieldArray({
@@ -38,8 +44,20 @@ const InventoryForm: React.FC<TInventoryFormProps> = ({ initialItems }) => {
     remove(index);
   };
 
-  const onSubmit = (data: TInventoryForm) => {
-    console.log(data);
+  const onSubmit = async (data: TInventoryForm) => {
+    try {
+      const response = await updateInventory(data.items);
+      notifications.show(`Inventory  was successfully updated`, {
+        severity: "success",
+        autoHideDuration: 3000,
+      });
+      reset({ items: response });
+    } catch (error) {
+      notifications.show("Something went wrong!", {
+        severity: "error",
+        autoHideDuration: 3000,
+      });
+    }
   };
 
   return (

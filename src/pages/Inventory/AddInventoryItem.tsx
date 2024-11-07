@@ -1,6 +1,7 @@
-import { Button, Stack } from "@mui/material";
+import { Button, Link as MUILink, Stack } from "@mui/material";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { NavLink } from "react-router-dom";
 import { IInventoryItem } from "../../api/models/inventory";
 import { ProductSelect } from "../../components/common/ProductSelect";
 import { Quantity } from "../../components/common/Quantity";
@@ -34,18 +35,23 @@ const AddInventoryItem: React.FC<TAddInventoryItemProps> = ({
 
   return (
     <FormProvider {...addInventoryItemMethods}>
-      <Stack
-        component="form"
-        direction="row"
-        gap={3}
-        onSubmit={addInventoryItemMethods.handleSubmit(onAddItem)}
-      >
-        <ProductSelect />
-        <Quantity />
+      <Stack direction="column">
+        <Stack
+          component="form"
+          direction="row"
+          gap={3}
+          onSubmit={addInventoryItemMethods.handleSubmit(onAddItem)}
+        >
+          <ProductSelect />
+          <Quantity />
 
-        <Button type="submit" variant="outlined">
-          Add
-        </Button>
+          <Button type="submit" variant="outlined">
+            Add
+          </Button>
+        </Stack>
+        <MUILink component={NavLink} to={"/product-create"}>
+          New product
+        </MUILink>
       </Stack>
     </FormProvider>
   );

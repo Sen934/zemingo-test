@@ -18,8 +18,12 @@ const useUpdateInventory = () => {
 
   const { mutateAsync, isLoading } = useMutation({
     mutationFn: createInventory,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [QueryKey.Inventory] });
+    onMutate: async (newInventory) => {
+      await queryClient.cancelQueries({ queryKey: [QueryKey.Inventory] });
+
+      queryClient.setQueryData([QueryKey.Inventory], newInventory);
+
+      return { newInventory };
     },
   });
 
